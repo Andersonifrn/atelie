@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Cliente</title>
+
+<Style>
+
+body{
+	
+	background-image: url("https://thumbs.dreamstime.com/z/as-ferramentas-da-costura-na-opini%C3%A3o-superior-do-fundo-branco-da-tela-sairam-do-grupo-66514411.jpg");
+}
+
+
+.div1{
+	margin-left: 35px;
+	margin-top: 75px;
+	margin-right: 350px;
+}
+h3{
+	color:black;
+	font-size: 45px;
+	font-style: italic;
+	font-weight: bolder;
+	font-family: 'Times New Roman', Times, serif;
+	margin: 2px;
+}
+#cabecalho{
+
+	
+	height: 120px;
+   margin-bottom: 34px;
+}
+.negrit{
+	font-weight: bolder;
+
+	
+}
+.botao{
+	margin-top: 15px;
+	margin-left: 35px;
+	margin-bottom: 45px;
+}
+.titulo{
+   margin-top: 34px;
+
+  
+}
+.vh-100{
+	background-image: url("https://thumbs.dreamstime.com/z/as-ferramentas-da-costura-na-opini%C3%A3o-superior-do-fundo-branco-da-tela-sairam-do-grupo-66514411.jpg");
+}
+#bot1{
+	margin-right: 445px;
+	margin: 56px;
+}
+#bot2{
+	margin-left: 145px;
+	margin-top: 334px;
+}
+</Style>
+<link rel="icon" type="imagem/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoOqvREKWuBznjWdL6srC6XRptoXnUaMFEJw&usqp=CAU" />
+   
+    <div th:replace="linkCss"></div>
+   
+</head>
+<body>
+
+  <section class="vh-100">
+ 
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card-body p-5 text-center">
+          <div th:replace="~{mensagem}"></div>
+          <div class="row"> 
+         <div class="card shadow-2-strong" id="cabecalho" style="border-radius: 1rem;">  
+            <h3 class="mb-5 titulo">Cadastrar Clientes</h3>
+         </div>
+          </div>
+          
+            <form th:action="@{/Clientes/Cadastro}" th:object="${pessoa}"
+      method="post">
+      
+            <div class="form-outline mb-4">
+             <div class="row negrit">
+              Nome:
+              <input type="text" class="form-control form-control-lg" th:field="*{nome}" placeholder="Informe nome" required="Obrigatório"/>
+               <input type="hidden"  th:field="*{usuario.id}">
+             </div>
+            </div>
+              <div class="form-outline mb-4">
+              <div class="row negrit">
+               Telefone:
+              <input type="text" class="form-control form-control-lg" th:field="*{telefone}" placeholder="Informe Telefone" required="Obrigatório"/>
+              </div>
+            </div>
+              <div class="form-outline mb-4">
+              <div class="row negrit ">
+               Endereço:
+              <input type="text" class="form-control form-control-lg" th:field="*{endereco}" placeholder="Informe Endereço" required="Obrigatório"/>
+              </div>
+            </div>
+            
+           <div class="botao">
+          
+            <input type="submit" class="btn btn-success" th:value="Salvar"/>
+	           <a  class="btn btn-danger" href="/">Voltar</a>
+	         
+           </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+</section>
+               <div th:replace="linkjavascript"></div>
+</body>
+</html>
+

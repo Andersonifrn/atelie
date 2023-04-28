@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt"
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<style>
+ body{
+	background-color: aquamarine;
+	
+}
+.vh-100{
+	background-color: aquamarine;
+}
+#centro{
+	background-color: aliceblue;
+}
+.tab{
+	border-style: groove;
+}
+.table{
+	width: 100%;
+}
+/* colocando uma barra de rolagem na tabela*/
+.barraderolagem{
+	height: 400px;
+	overflow: auto;
+}
+</style>
+<meta charset="UTF-8">
+<title>Lista de clientes</title>
+        <div th:replace="linkCss"></div>
+ 
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+      <section class="vh-100">
+ 
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100" id="centro" >
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5" >
+          <div class="card-body p-5 text-center" >
+        <h1>Listar Clientes</h1>
+<div th:if="${msgError} != null">
+ <b  th:text="${msgError}" style="color: rgb(255, 0, 0);"></b>
+  <br/><br/>
+ </div>
+ 
+     
+     <!-- Esse formulário  enviar os dados com uma url lista inicial do controle,uma url para o método especifico de listar -->
+    <form th:action="@{/Clientes/Listagem}" method="get">   
+      <table>
+          <tr>
+           <td>Nome:</td>
+           
+           <td>    
+           <input type="text" th:name="nome"/>
+           </td>
+         </tr>
+           <tr>
+           <td>Telefone:</td>
+           <td>
+           <input type="text" th:name="telefone"/>
+           </td>
+         </tr>
+         <tr>
+           <td>Endereço:</td>
+           <td>
+           <input type="text" th:name="endereco"/>
+           </td>
+          <tr>
+           
+           <td colspan="2">
+           <input type="checkbox" th:name="mostrarClientes"
+              th:value="true"/>
+              Listar todos clientes
+           </td>
+         </tr>
+         
+      </table>
+         
+         <input type="submit" value="listar"/>
+           <input type="submit" value="Voltar"
+          formaction="/" formmethod="get"/>
+           
+     </form>
+         <div  th:if="${not #lists.isEmpty(clientesCadastrados)}">
+         <div class="barraderolagem">
+         <table class="table table-bordered "> 
+  <thead>
+    <tr>
+      <th scope="col">Nome:</th>
+      <th scope="col">Telefone</th>
+      <th scope="col">Endereço</th>
+      <th scope="col">Opções</th>
+     <th th:if="${mostrarClientes}!= null"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each=" cliente: ${clientesCadastrados}">
+               
+               <td th:text="${cliente.nome}"></td>
+               
+               <td th:text="${cliente.telefone}"></td>
+               
+               <td th:text="${cliente.endereco}"></td>
+             
+               <td th:if="${mostrarClientes}"></td>
+                 <td>
+                  
+                <a th:href="'/Clientes/editarCliente/' + ${cliente.id}">editar</a>
+                
+                 <a th:href="'/Clientes/excluir/' + ${cliente.id}" th:onclick="if(!confirm('Deseja excluir esse Cliente?'))return false">Exluir 
+                 </a>
+              </td>
+            </tr>
+        </tbody>
+     </table>
+         </div>
+         </div>
+        </div>
+      </div>
+    </div>
+ 
+</section>
+  <div th:replace="linkjavascript"></div>
+</body>
+</html>
